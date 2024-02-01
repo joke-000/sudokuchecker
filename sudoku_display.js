@@ -25,6 +25,9 @@ class SudokuDisplay {
         form.setAttribute("id", "inputdiv");
         for (let i = 0; i < Object.keys(this.sudoku).length; i++) {
             var rowDiv = document.createElement('div');
+            if (i==2 || i==5){
+                rowDiv.setAttribute('class', 'horizontal-divider');
+            }
             for (let j = 0; j < this.sudoku[i].length; j++) {
                 var newField = document.createElement('input');
                 newField.setAttribute('type', 'text');
@@ -35,6 +38,9 @@ class SudokuDisplay {
 
                 if (this.sudoku[i][j] != 0) {
                     newField.setAttribute('value', this.sudoku[i][j]);
+                }
+                if (j==2 || j==5){
+                    newField.setAttribute('class', 'vertical-divider');
                 }
                 rowDiv.appendChild(newField);
             }

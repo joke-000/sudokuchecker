@@ -59,7 +59,7 @@ require 'sudoku_game.php';
             <script>
                 var infoText = "This sudoku board is valid, but it cannot be solved in a reasonable amount of time. "+
                 "This is because it has less than <?php echo $sudokuGame->minimumClues ?> clues."+
-                "Press the button below to return to the input page and add more clues";
+                "Press the button below to return to the input page and try again.";
                 makeInfoPar(infoText, document.getElementById('table-div'))
             </script>
         <?php endif; ?>

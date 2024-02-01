@@ -21,3 +21,11 @@ button, input[type="submit"] {
 .container {
     background-color: white;
 }
+
+.horizontal-divider {
+    margin-bottom: 2px;
+}
+
+.vertical-divider {
+    margin-right: 2px;
+}
