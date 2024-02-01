@@ -9,6 +9,7 @@ table, th, td {
 
 input[type="text"], td {
     width: 2em;
+    text-align: center; 
 }
 
 

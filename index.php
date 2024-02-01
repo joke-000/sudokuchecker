@@ -15,7 +15,7 @@
 
 <div class="container">
     <h3> Make your own sudoku and check if it is valid </h3>
-    <p> You need at least 28 clues for the sudoku to be solvable </p>   
+    <p> You need at least 25 clues for the sudoku to be solvable </p>   
     <button onclick="useExampleSudoku()" id="switch-button">Use example with some clues filled in</button> 
     <div id="form-div"></div>
 </div>

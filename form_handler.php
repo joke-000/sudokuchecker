@@ -29,7 +29,7 @@ require 'sudoku_game.php';
     <?php
     $sudokuParser = new SudokuParser($_POST);
     $parsedSudokuArray = $sudokuParser->parse();
-    $sudokuGame = new SudokuGame($parsedSudokuArray, new BackTrackSolver(), 28);
+    $sudokuGame = new SudokuGame($parsedSudokuArray, new BackTrackSolver(), 25);
     ?>
 
     <?php if ($sudokuGame->solutionPossible()): ?>
@@ -46,11 +46,20 @@ require 'sudoku_game.php';
     <?php else: ?>
         <?php if (!$sudokuGame->boardIsValid()): ?>
             <script>
-                makeInfoPar("Not a valid Sudoku board.", document.getElementById('table-div'))
+                var infoText = "This is not a valid Sudoku board. "+ 
+                "Please return to the input page and make sure your clues conform to the rules of Sudoku.";
+                makeInfoPar(infoText, document.getElementById('table-div'));
+                var link = document.createElement('a');
+                var  linkText = document.createTextNode("Read more about sudoku rules");
+                link.appendChild(linkText);
+                link.href = "https://www.sudokuonline.io/tips/sudoku-rules";
+                document.getElementById('table-div').appendChild(link);
             </script>
         <?php elseif (!$sudokuGame->boardIsSolvable()): ?>
             <script>
-                var infoText = "This sudoku board is not solvable in a reasonable amount of time, because it has less than <?php echo $sudokuGame->minimumClues ?> clues."
+                var infoText = "This sudoku board is valid, but it cannot be solved in a reasonable amount of time. "+
+                "This is because it has less than <?php echo $sudokuGame->minimumClues ?> clues."+
+                "Press the button below to return to the input page and add more clues";
                 makeInfoPar(infoText, document.getElementById('table-div'))
             </script>
         <?php endif; ?>
@@ -59,7 +68,7 @@ require 'sudoku_game.php';
 <?php else: ?>
     <div class="container">
         <h3> Make your own sudoku and check if it is valid </h3>
-        <p> You need at least 28 clues for the sudoku to be solvable </p>
+        <p> You need at least 25 clues for the sudoku to be solvable </p>
         <button onclick="location.replace('index.php')">
             Visit our SudokuMaker
         </button>
