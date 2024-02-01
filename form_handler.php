@@ -59,7 +59,7 @@ require 'sudoku_game.php';
 <?php else: ?>
     <div class="container">
         <h3> Make your own sudoku and check if it is valid </h3>
-        <p> You need at least 30 clues for the sudoku to be solvable </p>
+        <p> You need at least 28 clues for the sudoku to be solvable </p>
         <button onclick="location.replace('index.php')">
             Visit our SudokuMaker
         </button>
