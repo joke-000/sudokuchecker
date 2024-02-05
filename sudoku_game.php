@@ -61,7 +61,7 @@ class SudokuGame {
     }
 
     public function getSolutionTime() {
-        return $this->sudokuSolver->time;
+        return $this->sudokuSolver->elapsedTime;
     }
 }
 
