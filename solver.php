@@ -17,6 +17,7 @@ class BackTrackSolver implements SudokuSolver {
     public $time;
 
     public function __construct() {
+     
         $this->time_tracking['start'] = microtime(true);
     }
 
@@ -123,8 +124,9 @@ class BackTrackSolver implements SudokuSolver {
 
             if (count($ops[0]['permissible']) == 1) {
                 $arr[$ops[0]['rowIndex']][$ops[0]['columnIndex']] = current($ops[0]['permissible']);
+               
                 continue;
-            }
+            } 
 
             foreach ($ops[0]['permissible'] as $value) {
                 $tmp = $arr;
@@ -145,7 +147,7 @@ class BackTrackSolver implements SudokuSolver {
             $this->time = number_format($this->time, 3);
             return $this->comming_arr;
         } else {
-            return $arr;
+            return false;
         }
     }
 

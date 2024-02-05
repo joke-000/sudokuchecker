@@ -32,34 +32,45 @@ require 'sudoku_game.php';
     $sudokuGame = new SudokuGame($parsedSudokuArray, new BackTrackSolver(), 25);
     ?>
 
-    <?php if ($sudokuGame->solutionPossible()): ?>
+    <?php if ($sudokuGame->boardIsValid() && $sudokuGame->boardHasSufficientClues()): ?>
 
-        <?php
-        $sudokuGrid = $sudokuGame->getSolution();
-        $sudokuTime = $sudokuGame->getSolutionTime();
-        ?>
-        <script>
-            var backendSudoku = <?php echo json_encode($sudokuGrid); ?>;
-            var backendSudokuTime = <?php echo json_encode($sudokuTime); ?>;
-            makeTable(backendSudoku, backendSudokuTime);
-        </script>
+        <?php if ($sudokuGame->getSolution()): ?>
+            <?php
+            $sudokuGrid = $sudokuGame->getSolution();
+            $sudokuTime = $sudokuGame->getSolutionTime();
+            ?>
+
+            <script>
+                var backendSudoku = <?php echo json_encode($sudokuGrid); ?>;
+                var backendSudokuTime = <?php echo json_encode($sudokuTime); ?>;
+                makeTable(backendSudoku, backendSudokuTime);
+            </script>
+        <?php else: ?>
+            <script>
+                var infoText = "Although the clues in this board are valid, " +
+                    "this board is impossible to solve.";
+                makeInfoPar(infoText, document.getElementById('table-div'))
+            </script>
+
+        <?php endif; ?>
+
     <?php else: ?>
         <?php if (!$sudokuGame->boardIsValid()): ?>
             <script>
-                var infoText = "This is not a valid Sudoku board. "+ 
-                "Please return to the input page and make sure your clues conform to the rules of Sudoku.";
+                var infoText = "This is not a valid Sudoku board. " +
+                    "Please return to the input page and make sure your clues conform to the rules of Sudoku.";
                 makeInfoPar(infoText, document.getElementById('table-div'));
                 var link = document.createElement('a');
-                var  linkText = document.createTextNode("Read more about sudoku rules");
+                var linkText = document.createTextNode("Read more about sudoku rules");
                 link.appendChild(linkText);
                 link.href = "https://www.sudokuonline.io/tips/sudoku-rules";
                 document.getElementById('table-div').appendChild(link);
             </script>
-        <?php elseif (!$sudokuGame->boardIsSolvable()): ?>
+        <?php elseif (!$sudokuGame->boardHasSufficientClues()): ?>
             <script>
-                var infoText = "This sudoku board is valid, but it cannot be solved in a reasonable amount of time. "+
-                "This is because it has less than <?php echo $sudokuGame->minimumClues ?> clues."+
-                "Press the button below to return to the input page and try again.";
+                var infoText = "This sudoku board is valid, but it cannot be solved in a reasonable amount of time. " +
+                    "This is because it has less than <?php echo $sudokuGame->minimumClues ?> clues. " +
+                    "Press the button below to return to the input page and try again.";
                 makeInfoPar(infoText, document.getElementById('table-div'))
             </script>
         <?php endif; ?>

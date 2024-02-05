@@ -25,7 +25,7 @@ class SudokuParser {
 
 class SudokuGame {
     public $sudokuBoard;
-    public $sudokuBoardValidator;
+    public SudokuBoardValidator $sudokuBoardValidator;
     public SudokuSolver $sudokuSolver;
     public $minimumClues;
 
@@ -36,15 +36,11 @@ class SudokuGame {
         $this->minimumClues = $minimumClues;
     }
 
-    public function solutionPossible() {
-        return ($this->boardIsSolvable() && $this->sudokuBoardValidator->validateBoard($this->sudokuBoard));
-    }
-
     public function boardIsValid() {
         return $this->sudokuBoardValidator->validateBoard($this->sudokuBoard);
     }
 
-    public function boardIsSolvable() {
+    public function boardHasSufficientClues() {
         $clues = [];
         foreach ($this->sudokuBoard as $row) {
             foreach ($row as $rowItem) {
@@ -57,6 +53,7 @@ class SudokuGame {
             return false;
         }
         return true;
+      
     }
 
     public function getSolution() {

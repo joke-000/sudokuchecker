@@ -10,13 +10,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script defer src="sudoku_display.js"></script>
+
+   
 </head>
 <body>
 
+<?php
+require 'sudoku_generator.php';
+?>
+
+<script type="text/javascript">
+        var generatedSudoku = <?php echo json_encode($emptyBoard); ?>;
+</script>
+
+
+
+
 <div class="container">
-    <h3> Make your own sudoku and check if it is valid </h3>
-    <p> You need at least 25 clues for the sudoku to be solvable </p>   
-    <button onclick="useExampleSudoku()" id="switch-button">Use example with some clues filled in</button> 
+    <h3> Make your own sudoku and check whether it can be solved</h3>
+    <p> You need at least 25 clues for the sudoku to be solvable </p>
+    <div><button onclick="useExampleSudoku()" >Use example with some clues filled in</button></div> 
+    <div><button onclick="useRandomSudoku()" >Use randomly generated clues</button></div>  
+    <div><button onclick="useEmptySudoku()" >Clear sudoku to start from scratch</button></div>   
+    
+
     <div id="form-div"></div>
 </div>
 

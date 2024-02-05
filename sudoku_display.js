@@ -48,7 +48,7 @@ class SudokuDisplay {
         }
         var newField = document.createElement('input');
         newField.setAttribute('type', 'submit');
-        newField.setAttribute('value', 'check validity and solve it!');
+        newField.setAttribute('value', 'Find out if this sudoku can be solved!');
         form.appendChild(newField);
 
         element.appendChild(form);
